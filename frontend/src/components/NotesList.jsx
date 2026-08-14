@@ -5,6 +5,8 @@ function NotesList({ compact = false }) {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["notes"],
     queryFn: useNote,
+    staleTime: 1000 * 5, // 5 sec
+    gcTime: 1000,
   });
 
   if (isLoading) {
