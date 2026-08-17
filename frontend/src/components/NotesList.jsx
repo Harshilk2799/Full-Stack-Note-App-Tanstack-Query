@@ -5,8 +5,8 @@ function NotesList({ compact = false }) {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["notes"],
     queryFn: ({ signal }) => useNote({ signal }),
-    staleTime: 1000 * 5, // 5 sec
-    gcTime: 1000,
+    staleTime: 1000 * 30, // 5 sec
+    // gcTime: 1000,
   });
 
   if (isLoading) {
