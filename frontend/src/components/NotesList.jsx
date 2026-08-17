@@ -4,7 +4,7 @@ import { useNote } from "../hooks/useNote";
 function NotesList({ compact = false }) {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["notes"],
-    queryFn: useNote,
+    queryFn: ({ signal }) => useNote({ signal }),
     staleTime: 1000 * 5, // 5 sec
     gcTime: 1000,
   });
