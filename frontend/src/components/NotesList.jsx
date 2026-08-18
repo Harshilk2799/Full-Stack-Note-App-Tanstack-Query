@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNote } from "../hooks/useNote";
+import { Link } from "react-router-dom";
 
 function NotesList({ compact = false }) {
   const { data, isLoading, isError, error } = useQuery({
@@ -27,8 +28,10 @@ function NotesList({ compact = false }) {
                 <span>{note.tag}</span>
                 <time dateTime={note.date}>{note.date}</time>
               </div>
-              <h3>{note.title}</h3>
-              <p>{note.description}</p>
+              <Link to={`/view-note/${note.id}`}>
+                <h3>{note.title}</h3>
+                <p>{note.description}</p>
+              </Link>
             </div>
 
             <div className="note-actions" aria-label={`${note.title} actions`}>
