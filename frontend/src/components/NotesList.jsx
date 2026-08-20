@@ -41,7 +41,7 @@ function NotesList({ compact = false }) {
                 <span>{note.tag}</span>
                 <time dateTime={note.date}>{note.date}</time>
               </div>
-              <Link to={`/view-note/${note.id}`}>
+              <Link to={`/view-note/${note.id}`} className="note-link">
                 <h3>{note.title}</h3>
                 <p>{note.description}</p>
               </Link>
@@ -49,7 +49,9 @@ function NotesList({ compact = false }) {
 
             <div className="note-actions" aria-label={`${note.title} actions`}>
               <button type="button" className="edit-button">
-                <Link to={`/edit-note/${note.id}`}>Edit</Link>
+                <Link to={`/edit-note/${note.id}`} className="edit-button">
+                  Edit
+                </Link>
               </button>
 
               <button
