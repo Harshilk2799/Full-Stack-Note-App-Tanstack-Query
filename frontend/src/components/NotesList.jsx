@@ -1,13 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useNote } from "../hooks/useNote";
 import { Link } from "react-router-dom";
+import { useDeleteNote } from "../hooks/useDeleteNote";
 
 function NotesList({ compact = false }) {
+  const queryClient = useQueryClient();
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["notes"],
     queryFn: ({ signal }) => useNote({ signal }),
     staleTime: 1000 * 30, // 5 sec
     // gcTime: 1000,
+  });
+
+  const {
+    mutate: deleteNote,
+    isPending: isDeleting,
+    variables,
+  } = useMutation({
+    mutationFn: useDeleteNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+    },
   });
 
   if (isLoading) {
@@ -41,10 +54,12 @@ function NotesList({ compact = false }) {
 
               <button
                 type="button"
+                onClick={() => deleteNote({ id: note.id })}
                 className="delete-button"
                 aria-label="Delete note"
+                disabled={isDeleting && variables?.id === note.id}
               >
-                X
+                {isDeleting && variables?.id === note.id ? "..." : "X"}
               </button>
             </div>
           </article>

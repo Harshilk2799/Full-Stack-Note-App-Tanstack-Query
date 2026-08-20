@@ -4,12 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useViewNote } from "../hooks/useViewNote";
 
 function ViewNotePage() {
-  const { id } = useParams();
+  const params = useParams();
   const navigate = useNavigate();
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["notes", id],
-    queryFn: () => useViewNote(id),
+    queryKey: ["notes", { id: params.id }],
+    queryFn: ({ signal }) => useViewNote({ signal, id: params.id }),
   });
 
   if (isLoading) {
@@ -54,7 +54,7 @@ function ViewNotePage() {
           {data?.description}
         </p>
       </div>
-      <button className="btn btn-primary mt-3" onClick={navigate(-1)}>
+      <button className="btn btn-primary mt-3" onClick={() => navigate("/")}>
         Back
       </button>
     </div>
