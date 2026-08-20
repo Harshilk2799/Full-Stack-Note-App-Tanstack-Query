@@ -24,6 +24,7 @@ function EditNotePage() {
     // },
     onSuccess: () => {
       console.log("Note has been updated!");
+      navigate(`/view-note/${params.id}`);
     },
     onMutate: async (data) => {
       const note = data.payload;
@@ -74,13 +75,13 @@ function EditNotePage() {
       id: params.id,
       payload: { title: title, description: description },
     });
-    navigate(`/view-note/${params.id}`);
   }
 
   return (
     <>
       {data && (
         <form className="note-form" onSubmit={handleSubmit}>
+          <h2 className="form-title">Edit Note</h2>
           <label>
             <span>Title</span>
             <input
