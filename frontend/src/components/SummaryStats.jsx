@@ -1,6 +1,15 @@
-import { notes } from '../data/notes'
+import { useNote } from "../hooks/useNote";
+import { useQuery } from "@tanstack/react-query";
 
 function SummaryStats({ title, copy, action }) {
+  const {
+    data: notes = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["notes"],
+    queryFn: useNote,
+  });
   return (
     <>
       <p className="eyebrow">Workspace</p>
@@ -9,14 +18,13 @@ function SummaryStats({ title, copy, action }) {
 
       <div className="summary-grid">
         <div>
-          <strong>{notes.length}</strong>
+          <strong>{isLoading ? "…" : isError ? "—" : notes.length}</strong>
           <span>Total notes</span>
         </div>
       </div>
-
       {action}
     </>
-  )
+  );
 }
 
-export default SummaryStats
+export default SummaryStats;

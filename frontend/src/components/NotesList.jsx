@@ -36,8 +36,9 @@ function NotesList({ compact = false }) {
 
             <div className="note-actions" aria-label={`${note.title} actions`}>
               <button type="button" className="edit-button">
-                Edit
+                <Link to={`/edit-note/${note.id}`}>Edit</Link>
               </button>
+
               <button
                 type="button"
                 className="delete-button"

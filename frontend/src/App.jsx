@@ -4,6 +4,7 @@ import FindNotesPage from "./pages/FindNotesPage";
 import NewNotePage from "./pages/NewNotePage";
 import NotesPage from "./pages/NotesPage";
 import ViewNotePage from "./pages/ViewNotePage";
+import EditNotePage from "./pages/EditNotePage";
 import "./App.css";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/new" element={<NewNotePage />} />
         <Route path="/find" element={<FindNotesPage />} />
         <Route path="/view-note/:id" element={<ViewNotePage />} />
+        <Route path="/edit-note/:id" element={<EditNotePage />} />
       </Routes>
     </main>
   );
